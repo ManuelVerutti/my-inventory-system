@@ -1,0 +1,35 @@
+// prisma/schema.prisma
+datasource db {
+  provider  = "postgresql"
+  url  	    = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  role      Role
+  salesAsSeller    Sale[] @relation("SalesAsSeller")
+  salesAsCustomer  Sale[] @relation("SalesAsCustomer")
+}
+
+model Sale {
+  id          Int      @id @default(autoincrement())
+  productId   Int
+  quantity    Int
+  seller      User     @relation("SalesAsSeller", fields: [sellerId], references: [id])
+  sellerId    Int
+  customer    User     @relation("SalesAsCustomer", fields: [customerId], references: [id])
+  customerId  Int
+  createdAt   DateTime @default(now())
+}
+
+enum Role {
+  SELLER
+  CUSTOMER
+}
+
