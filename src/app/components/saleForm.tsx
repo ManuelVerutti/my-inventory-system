@@ -21,9 +21,9 @@ type Sale = {
 }
 
 type SaleFormProps = {
-  onSubmit: (saleData: Sale) => void
-  onCancel: () => void
-  initialData?: Sale
+  onSubmit: any;
+  onCancel: () => void;
+  initialData?: Sale;
 }
 
 const SaleForm: React.FC<SaleFormProps> = ({ onSubmit, onCancel, initialData }) => {

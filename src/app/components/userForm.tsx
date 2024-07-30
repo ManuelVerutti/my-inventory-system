@@ -8,7 +8,7 @@ type User = {
 }
 
 type UserFormProps = {
-  onSubmit: (userData: User) => void
+  onSubmit: any
   onCancel: () => void
   initialData?: User
 }
